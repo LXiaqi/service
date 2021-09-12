@@ -1,23 +1,20 @@
 import React from 'react';
-import { Layout } from 'antd';
-import './App.less';
-import Navigation from './components/navigation'
-const { Header, Footer, Sider, Content } = Layout;
+import './App.css';
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+
+    }
+  };
   render() {
     return (
-      <Layout className="layout">
-        <Sider className="sider">
-          <Navigation />
-        </Sider>
-        <Layout>
-          <Header>Header</Header>
-          <Content>Content</Content>
-          <Footer>Footer</Footer>
-        </Layout>
-    </Layout>
+      <div className="App">
+        {this.props.children}
+      </div>
     )
   }
 }
 
 export default App;
+
