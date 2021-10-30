@@ -1,6 +1,7 @@
 import React from "react";
 import logo from './../../logo.svg'
 import { Menu } from 'antd';
+import {NavLink} from 'react-router-dom'
 import MenuConfig from './../../config/menuConfig';
 import './index.less'
 const { SubMenu } = Menu;
@@ -29,7 +30,9 @@ class navigation extends React.Component {
                 )
             }
             // 重复点击同一个路由组件， 数据不刷新， 会有警告 replace这个很好的解决了这个问题
-            return <Menu.Item className="menuitem" key={item.key} title={item.title} >{item.title}</Menu.Item>
+            return <Menu.Item className="menuitem" key={item.key} title={item.title} >
+                <NavLink to= {item.key}>{item.title}</NavLink>
+               </Menu.Item>
         })
     };
     handleClick =({item}) => {

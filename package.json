@@ -157,5 +157,5 @@
     "less": "^4.1.1",
     "less-loader": "^6.0.0"
   },
-  "proxy": "https://online.365lawhelp.com"
+  "proxy": "http://192.168.6.125:8081"
 }

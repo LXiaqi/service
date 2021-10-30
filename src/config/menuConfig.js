@@ -19,7 +19,7 @@ const menuList =  [
     },
     {
         title:'语句管理',
-        key:'/admin/language',
+        key:'/admin/speechArt',
        
     },
     {

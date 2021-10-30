@@ -4,6 +4,8 @@ import App from './../App';
 import Admin from '../pages/admin/admin'
 import Login from '../pages/login/login'
 import Home from './../pages/home/home'
+import SpeechArt from './../pages/speechArt/speechArt'
+
 class IRouter extends React.Component {
     render(){
         return (
@@ -14,6 +16,7 @@ class IRouter extends React.Component {
                         <Route path='/admin' render={()=> 
                             <Admin>
                                 <Route path='/admin/home'  component={Home}></Route>
+                                <Route path='/admin/speechArt'  component={SpeechArt}></Route>
                             </Admin>
                         } ></Route>
                     </Switch>

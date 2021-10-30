@@ -5,12 +5,13 @@ const http = axios.create()
 http.interceptors.response.use(
     response => {
         const res = response.data
-        if(res.result === 0) {
-            return res
-        } else {
-            message.warning(res.msg);
-            return res
-        }
+        // if(res.result === 0) {
+        //     return res
+        // } else {
+        //     message.warning(res.msg);
+        //     return res
+        // }
+        return res
     },
     error => {
       message.warning('服务器错误');
