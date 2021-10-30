@@ -37,17 +37,23 @@ class SpeechArt extends React.Component {
     TypeChange = (e) => {
         this.setState({
             type:e
+        },() =>{
+            this.request()
         })
-        this.request()
     };
     StatusChange = (e) =>{
         this.setState({
             status:e
+        },()=>{
+            this.request()
         })
-        this.request()
     };
     render() {
-        const optionType =[{
+        const optionType =[
+        {
+            value:'',
+            title:'全部'
+        },{
             value:0,
             title:'问候语'
         },{
@@ -60,7 +66,12 @@ class SpeechArt extends React.Component {
             value:3,
             title:'自动回复'
         }];
-        const optionStatus = [{
+        const optionStatus = [
+        {
+            value:'',
+            title:'全部'
+        }, 
+        {
             value:0,
             title:'未使用'
         },{
@@ -99,7 +110,7 @@ class SpeechArt extends React.Component {
                 title: '操作',
                 width: 120,
                 render: (val,item) => <div>
-                   <Button type="primary" danger className="btn_right" size="small">编辑</Button>
+                   <Button  type="primary"  className="btn_right blue" size="small">编辑</Button>
                     <Button type="primary" danger className="btn_right" size="small">删除</Button>
                 </div>
             },
@@ -107,18 +118,16 @@ class SpeechArt extends React.Component {
         return(
             <div className='speech'>
                 <Card className='search'>
-                    <Select defaultValue="请选择" className='select' onChange={this.TypeChange} >
+                    <Select defaultValue="全部" className='select' onChange={this.TypeChange} >
                         {optionType.map(item => {
                             return <Option key={item.value} value={item.value}>{item.title}</Option>
                         })}
                     </Select>
-                    <Select defaultValue="请选择" className='select' onChange={this.StatusChange} >
+                    <Select defaultValue="全部" className='select' onChange={this.StatusChange} >
                         {optionStatus.map(item => {
                             return <Option key={item.value} value={item.value}>{item.title}</Option>
                         })}
                     </Select>
-                    <Button className='btn' type="primary">查找</Button>
-                    <Button className='btn'>重置</Button>
                     <Button className='btn green' type="dashed">新增</Button>
                 </Card>
                 <Card>
