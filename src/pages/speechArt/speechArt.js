@@ -2,7 +2,7 @@ import React from "react";
 import  './speechArt.less'
 import { Select,Button,Card,Tag,Table } from 'antd';
 import { speechList } from './../../api/speech'
-import untils from '../../utils/pagination'
+import pageinations from '../../untils/pagination'
 const { Option } = Select;
 class SpeechArt extends React.Component {
     constructor(props) {
@@ -10,11 +10,11 @@ class SpeechArt extends React.Component {
         this.state = {
           type:'',
           status:'',
-          page:1,
-          pageSize:10,
-          list:'',
+          list:[],
           loading:true,
-          pagination:{}
+          pagination:{},
+          page:1,
+        pageSize:10,
         }
     }
     componentDidMount() {
@@ -29,7 +29,14 @@ class SpeechArt extends React.Component {
             this.setState({
                 list:res.data,
                 loading:false,
-                
+                pagination: pageinations(res, (current) => {
+                    this.setState({
+                        page:current
+                    },()=>{
+                        this.request();
+                    })
+                   
+                })
             })
         })
     };
@@ -131,7 +138,7 @@ class SpeechArt extends React.Component {
                     <Button className='btn green' type="dashed">新增</Button>
                 </Card>
                 <Card>
-                    <Table  pagination={this.state.pagination} rowKey={row => row.Id} columns={columns} dataSource={this.state.list} loading={this.state.loading} ></Table>
+                    <Table scroll={{ y: 600 }}  pagination={this.state.pagination} rowKey={row => row.Id} columns={columns} dataSource={this.state.list} loading={this.state.loading} ></Table>
                 </Card>
             </div>
         )

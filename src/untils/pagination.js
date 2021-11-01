@@ -1,15 +1,15 @@
 
-function pageination(data,callback) {
+function pageinations (data,callback) {
     return {
         onChange:(current) => {
             callback(current);
         },
         // current:data.page,
         pageSize:10,
-        total:data.recordsTotal,
+        total:data.Total,
         showTotal:() => {
-            return `共${data.recordsTotal}条`
+            return `共${data.Total}条`
         }
     }
 }
-export default pageination
+export default pageinations
