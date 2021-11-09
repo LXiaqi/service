@@ -1,11 +1,9 @@
 
 function pageinations (data,callback) {
     return {
-        onChange:(current) => {
-            callback(current);
+        onChange:(current,size) => {
+            callback(current,size);
         },
-        // current:data.page,
-        pageSize:10,
         total:data.Total,
         showTotal:() => {
             return `共${data.Total}条`

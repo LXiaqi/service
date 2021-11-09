@@ -29,9 +29,10 @@ class SpeechArt extends React.Component {
             this.setState({
                 list:res.data,
                 loading:false,
-                pagination: pageinations(res, (current) => {
+                pagination: pageinations(res, (current,size) => {
                     this.setState({
-                        page:current
+                        page:current,
+                        pageSize:size
                     },()=>{
                         this.request();
                     })

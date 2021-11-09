@@ -1,15 +1,18 @@
 import React from 'react'
+import { Card} from 'antd';
 class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            msg:'这是首页啊'
+           
         }
     };
     render() {
         return(
-            <div>{this.state.msg}</div>
-        )
+            <div>
+               <Card></Card>
+            </div>
+        )  
     }
 }
 export default Home
