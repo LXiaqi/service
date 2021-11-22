@@ -1,8 +1,10 @@
 import React from "react";
 import  './speechArt.less'
-import { Select,Button,Card,Tag,Table } from 'antd';
-import { speechList } from './../../api/speech'
+import { Select,Button,Card,Tag,Table,Popconfirm  } from 'antd';
+import { speechList,delStatements } from './../../api/speech'
 import pageinations from '../../untils/pagination'
+import AddLanguage from './addLanguage'
+import EditLanguage from './editLanguage'
 const { Option } = Select;
 class SpeechArt extends React.Component {
     constructor(props) {
@@ -14,7 +16,9 @@ class SpeechArt extends React.Component {
           loading:true,
           pagination:{},
           page:1,
-        pageSize:10,
+          pageSize:10,
+          addType:0,
+          editinfo:{}
         }
     }
     componentDidMount() {
@@ -56,6 +60,39 @@ class SpeechArt extends React.Component {
             this.request()
         })
     };
+    // 删除语句
+    del(id) {
+        delStatements(id).then(() => {
+            this.request()
+        })
+    };
+    // 新增语句
+    addStatement =() =>{
+        console.log('新增');
+        this.setState({
+            addType:1
+        })
+    };
+    // 编辑语句
+    edit(row) {
+        this.setState({
+            addType:2,
+            editinfo:row
+        })
+    }
+    //新增完毕关闭模态框
+    setAddType = (e) => {
+        this.setState({
+            addType:e
+        })
+        this.request()
+    };
+    setEditType = (e) => {
+        this.setState({
+            addType:e
+        })
+        this.request()
+    }
     render() {
         const optionType =[
         {
@@ -118,8 +155,10 @@ class SpeechArt extends React.Component {
                 title: '操作',
                 width: 120,
                 render: (val,item) => <div>
-                   <Button  type="primary"  className="btn_right blue" size="small">编辑</Button>
-                    <Button type="primary" danger className="btn_right" size="small">删除</Button>
+                   <Button  type="primary"  className="btn_right blue" size="small" onClick={() => this.edit(item)}>编辑</Button>
+                   <Popconfirm title="是否删除该语句" okText="是" cancelText="否" onConfirm={() => this.del(item.Id)}>
+                            <Button  type="primary" danger className="btn_right" size="small">删除</Button>
+                    </Popconfirm>
                 </div>
             },
         ];
@@ -136,11 +175,12 @@ class SpeechArt extends React.Component {
                             return <Option key={item.value} value={item.value}>{item.title}</Option>
                         })}
                     </Select>
-                    <Button className='btn green' type="dashed">新增</Button>
+                    <Button className='btn green' type="dashed" onClick={this.addStatement}>新增</Button>
                 </Card>
                 <Card>
                     <Table scroll={{ y: 600 }}  pagination={this.state.pagination} rowKey={row => row.Id} columns={columns} dataSource={this.state.list} loading={this.state.loading} ></Table>
                 </Card>
+                {this.state.addType === 1 ? <AddLanguage setAddType={this.setAddType}  /> : this.state.addType === 2 ? <EditLanguage setEditType={this.setEditType} data={this.state.editinfo} /> : null }
             </div>
         )
     }
